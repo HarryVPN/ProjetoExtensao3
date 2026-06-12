@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "ÚLTIMAS ATIVIDADES RECENTES";
+}
+
+<style>
+    /* CARDS DE RESUMO */
+    .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .card {
+        background: #1e293b;
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+        border-bottom: 4px solid transparent;
+    }
+
+        .card.total {
+            border-color: var(--accent-green);
+        }
+
+        .card.minimo {
+            border-color: var(--accent-orange);
+        }
+
+        .card.mov {
+            border-color: white;
+        }
+
+        .card h3 {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .card .value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+    /* TABELA DE ATIVIDADES */
+    .section-title {
+        margin: 30px 0 15px 0;
+        font-size: 18px;
+        color: var(--text-muted);
+    }
+
+    .recent-table {
+        width: 100%;
+        background: #1e293b;
+        border-radius: 12px;
+        border-collapse: collapse;
+        overflow: hidden;
+    }
+        .recent-table th, .recent-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        .recent-table th {
+            background: #334155;
+            color: var(--accent-orange);
+            font-size: 14px;
+        }
+
+
+    .badge {    
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .badge-in {
+        background: rgba(34, 197, 94, 0.2);
+        color: var(--accent-green);
+    }
+
+    .badge-out {
+        background: rgba(239, 68, 68, 0.2);
+        color: var(--accent-red);
+    }
+
+    .textoBranco{
+        color:white;
+    }
+</style>
+
+<div class="dashboard-cards">
+    <div class="card total">
+        <h3>Total de Itens</h3>
+        <div class="value textoBranco">1.240</div>
+    </div>
+    <div class="card minimo">
+        <h3>Itens com Estoque Mínimo</h3>
+        <div class="value textoBranco">18</div>
+    </div>
+    <div class="card mov">
+        <h3>Movimentações (7 dias)</h3>
+        <div class="value textoBranco">89</div>
+    </div>
+</div>
+
+<table class="recent-table">
+    <thead>
+        <tr>
+            <th>HORA</th>
+            <th>PRODUTO</th>
+            <th>TIPO</th>
+            <th>QUANTIDADE</th>
+            <th>USUÁRIO</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>14:32</td>
+            <td>Farinha Trigo Rosa</td>
+            <td><span class="badge badge-in">Entrada</span></td>
+            <td>50 Kg</td>
+            <td>João Pedro</td>
+        </tr>
+        <tr>
+            <td>14:28</td>
+            <td>Açúcar Refinado (2k)</td>
+            <td><span class="badge badge-out">Saída</span></td>
+            <td>10 Un</td>
+            <td>Ana Julia</td>
+        </tr>
+        <tr>
+            <td>14:15</td>
+            <td>Caixa Embalagem (G)</td>
+            <td><span class="badge badge-out">Saída</span></td>
+            <td>200 Un</td>
+            <td>João Paulo</td>
+        </tr>
+    </tbody>
+</table>
