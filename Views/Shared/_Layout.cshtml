@@ -105,25 +105,30 @@
         <nav class="nav-menu">
 
             @{
-                var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+                var paginaAtual = ViewContext.RouteData.Values["action"]?.ToString();
             }
-            <a class="nav-link nav-item @(currentAction == "Index" ? "active" : "")"
+            <a class="nav-link nav-item @(paginaAtual == "Index" ? "active" : "")"
                asp-controller="Home"
                asp-action="Index">
                 <i class="fa-solid fa-house"></i>Página Inicial
             </a>
 
-            <a class="nav-link nav-item @(currentAction == "Entrada" ? "active" : "")"
+            <a class="nav-link nav-item @(paginaAtual == "EntradaSaida" ? "active" : "")"
                asp-controller="Home"
-               asp-action="Entrada">
-                <i class="fa-solid fa-circle-arrow-up"></i>Incluir (Entrada)
+               asp-action="EntradaSaida">
+                <i class="fa-solid fa-circle-arrow-up"></i>Atualizar Estoque
             </a>
 
+            <a class="nav-link nav-item @(paginaAtual == "Registros" ? "active" : "")"
+               asp-controller="Home"
+               asp-action="Registros">
+                <i class="fa-solid fa-list-ul"></i>Registros
+            </a>
 
             <a href="#" class="nav-item"><i class="fa-solid fa-plus-circle"></i> Cadastrar</a>
 
-            <a href="#" class="nav-item"><i class="fa-solid fa-circle-arrow-down"></i> Retirar (Saída)</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-list-ul"></i> Movimentações</a>
+            @* <a href="#" class="nav-item"><i class="fa-solid fa-circle-arrow-down"></i> Retirar (Saída)</a> *@
+            @* <a href="#" class="nav-item"><i class="fa-solid fa-list-ul"></i> Movimentações</a> *@
             <a href="#" class="nav-item"><i class="fa-solid fa-chart-pie"></i> Relatórios</a>
         </nav>
         <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i> Configurações</a>

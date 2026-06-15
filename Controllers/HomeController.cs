@@ -11,7 +11,12 @@ namespace StockFlow.Controllers
             return View();
         }
 
-        public IActionResult Entrada()
+        public IActionResult EntradaSaida()
+        {
+            return View();
+        }
+
+        public IActionResult Registros()
         {
             return View();
         }

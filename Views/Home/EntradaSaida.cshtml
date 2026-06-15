@@ -18,10 +18,11 @@
         font-size: 24px;
     }
 
-    .container-entrada {
+    .containerScanner {
         display: flex;
         gap: 20px;
         max-width: 1200px; /* Limita a largura para não espalhar demais */
+        margin-bottom:4%;
     }
 
     .box {
@@ -37,26 +38,46 @@
         flex-shrink: 0;
     }
 
-    .scanner-area {
+
+    .scannerEntrada {
         text-align: center;
-        border: 2px dashed var(--accent-orange);
+        border: 2px dashed var(--accent-green);
         padding: 20px;
         border-radius: 12px;
         margin-bottom: 20px;
         background: rgba(255, 140, 0, 0.05);
     }
-
-        .scanner-area i {
+        .scannerEntrada i {
             font-size: 35px;
-            color: var(--accent-orange);
+            color: var(--accent-green);
             margin-bottom: 10px;
             display: block;
         }
-
-        .scanner-area p {
+        .scannerEntrada p {
             margin: 5px 0;
             font-size: 14px;
         }
+
+
+    .scannerSaida {
+        text-align: center;
+        border: 2px dashed var(--accent-red);
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        background: rgba(255, 140, 0, 0.05);
+    }
+        .scannerSaida i {
+            font-size: 35px;
+            color: var(--accent-red);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .scannerSaida p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
 
     .row {
         display: flex;
@@ -122,11 +143,11 @@
 
 
 <div class="main-content">
-    <h2>NOVA ENTRADA DE MATERIAL</h2>
-
-    <div class="container-entrada">
+    <p>INSERIR MATERIAL</p>
+    @* Entrada *@
+    <div class="containerScanner">
         <div class="box">
-            <div class="scanner-area">
+            <div class="scannerEntrada">
                 <i class="fa-solid fa-barcode"></i>
                 <p>ESCANEAR CÓDIGO DE BARRAS</p>
                 <input type="text" placeholder="Aguardando bip..." autofocus>
@@ -163,4 +184,92 @@
             <div class="info-valor" style="color: var(--accent-orange)">40 Kg</div>
         </div>
     </div>
+
+    <p>RETIRAR MATERIAL</p>
+    @* Saída *@
+    <div class="containerScanner">
+        <div class="box">
+            <div class="scannerSaida">
+                <i class="fa-solid fa-barcode"></i>
+                <p>ESCANEAR ITEM PARA RETIRADA</p>
+                <input type="text" placeholder="Aguardando bip..." autofocus>
+            </div>
+
+            <div class="row">
+                <div class="form-group" style="flex: 0.5;">
+                    <label class="label-desc">Quantidade</label>
+                    <input type="number" value="1">
+                    <div class="saldo-alerta"><i class="fa-solid fa-triangle-exclamation"></i> Max: 40kg</div>
+                </div>
+                @* <div class="form-group">
+                    <label class="label-desc">Setor de Destino</label>
+                    <select>
+                        <option disabled selected>Para onde vai este item?</option>
+                        <option>Cozinha Principal</option>
+                        <option>Confeitaria</option>
+                        <option>Balcão / Atendimento</option>
+                        <option>Descarte / Vencido</option>
+                    </select>
+                </div> *@
+            </div>
+
+            <button class="btn-confirm" id="btnTirar" style="background-color:orange"><i class="fa-solid fa-minus-circle"></i> CONFIRMAR RETIRADA</button>
+        </div>
+
+        <div class="box box-preview" style="text-align: center;">
+            <p class="label-desc">Item Identificado</p>
+            <div class="product-preview-img">
+                <i class="fa-solid fa-image" style="font-size: 30px; color: #1e293b;"></i>
+            </div>
+            <p class="label-desc">Produto</p>
+            <div class="info-valor">Farinha de Trigo Especial</div>
+            <p class="label-desc">Estoque em Mãos</p>
+            <div class="info-valor" style="color: var(--accent-red)">40 Kg</div>
+            <p class="label-desc">Estoque Mínimo</p>
+            <div class="info-valor">10 Kg</div>
+        </div>
+    </div>
 </div>
+
+<script>
+
+    const url = "http://10.1.94.2:5000"
+
+    const btnTirar = document.getElementById('btnTirar')
+
+    // btnLimpar.addEventListener('click',async () => {
+
+    //     document.getElementById('plates').textContent = Date.now();
+
+    //     fetch(url+"/reset", {
+    //         method: 'GET',
+    //         headers: { 'Accept': 'application/json' }
+    //     });
+    // })
+
+    const btnPlaca = document.getElementById('btnPlaca')
+
+    btnPlaca.addEventListener('click', async () => {
+
+        placaUi.textContent = Date.now();
+
+        try {
+
+            const response = await fetch(url + "/get_placa");
+
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+
+            const json = await response.json();
+
+            console.log(json);
+
+            placaUi.textContent = json.placa;
+
+        } catch (error) {
+            console.error(error.message);
+        }
+    });
+
+</script>
